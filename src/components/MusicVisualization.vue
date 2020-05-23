@@ -1,6 +1,7 @@
 <template> 
 <div>
     {{message}}
+    <audio></audio>
 </div>
 </template>
 
