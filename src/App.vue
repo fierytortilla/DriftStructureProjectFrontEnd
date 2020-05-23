@@ -2,15 +2,16 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <h1>DRIFT STRUCTURE</h1>
+    <music-selection />
     <music-visualization />
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
 import { eventBus } from '@/main.js';
 import MusicSettingsController from '@/components/MusicSettingsController.vue';
 import MusicVisualization from './components/MusicVisualization.vue';
+import MusicSelection from './components/MusicSelection.vue';
 
 export default {
   name: 'App',
@@ -21,7 +22,8 @@ export default {
   },
   components: {
     // 'music-settings-controller':MusicSettingsController,
-    'music-visualization': MusicVisualization
+    'music-visualization': MusicVisualization,
+    'music-selection': MusicSelection
   }
 }
 </script>

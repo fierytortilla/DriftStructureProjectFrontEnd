@@ -5,7 +5,9 @@
 </template>
 
 <script>
-const P5 = require("p5");
+import P5 from 'p5';
+
+var radar = require("../models/Radar.js");
 
 
 export default {
@@ -16,9 +18,8 @@ export default {
       } 
   },
   mounted() {
-    var radar = require("../models/Radar.js");
     new P5(radar.main);
-    // radar.setDelegate(this.callBackOnP5);
+    radar.setDelegate(this.callBackOnP5);
   },
   methods: {
       callBackOnP5: function(timeStr){
