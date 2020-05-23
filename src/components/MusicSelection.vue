@@ -4,10 +4,19 @@
 
 <script>
 export default {
+    name:'MusicSelection',
+    data(){
 
+    },
+    mounted(){
+
+    },
+    methods:{
+
+    }
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>

@@ -7,7 +7,7 @@ export default {
     name:'MusicSettingsController',
     data(){
         return {
-
+            someOtherThing: 0
         }
     },
     mounted(){

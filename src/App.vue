@@ -1,17 +1,27 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>DRIFT STRUCTURE</h1>
+    <music-visualization />
   </div>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
+import { eventBus } from '@/main.js';
+import MusicSettingsController from '@/components/MusicSettingsController.vue';
+import MusicVisualization from './components/MusicVisualization.vue';
 
 export default {
   name: 'App',
+  data(){
+    return {
+      thing:0
+    }
+  },
   components: {
-    HelloWorld
+    // 'music-settings-controller':MusicSettingsController,
+    'music-visualization': MusicVisualization
   }
 }
 </script>
