@@ -1,4 +1,5 @@
 import P5 from 'p5';
+import P5sound from "p5/lib/addons/p5.sound";
 
 let p5;
 let fft;
@@ -14,7 +15,7 @@ export function main(_p5) {
     //canvas.parent("p5Canvas");
     // p5.ellipse(p5.width / 2, p5.height / 2, 500, 500);
     p5.background(100);
-    fft = new p5.FFT();
+    fft = new P5sound.FFT();
     console.log(fft);
     // fft = new fft.FFT()
     fft.setInput("../assets/sawtooth.mp3")
