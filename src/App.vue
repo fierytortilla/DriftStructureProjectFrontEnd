@@ -2,7 +2,7 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
     <h1>DRIFT STRUCTURE</h1>
-    <music-selection />
+    <!-- <music-selection /> -->
     <music-visualization />
   </div>
 </template>

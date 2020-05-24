@@ -1,5 +1,5 @@
 import P5 from 'p5';
-import P5sound from "p5/lib/addons/p5.sound";
+import "../p5.sound.js";
 
 let p5;
 let fft;

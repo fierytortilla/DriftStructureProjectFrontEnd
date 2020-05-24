@@ -1,7 +1,7 @@
 <template> 
 <div>
     {{message}}
-    <audio></audio>
+    <!-- <audio></audio> -->
 </div>
 </template>
 
@@ -9,6 +9,7 @@
 import P5 from 'p5';
 
 var radar = require("../models/Radar.js");
+var radar2 = require("../models/OriginalRadar.js");
 
 
 export default {
@@ -19,8 +20,8 @@ export default {
       } 
   },
   mounted() {
-    new P5(radar.main);
-    radar.setDelegate(this.callBackOnP5);
+    new P5(radar2.main);
+    radar2.setDelegate(this.callBackOnP5);
   },
   methods: {
       callBackOnP5: function(timeStr){

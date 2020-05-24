@@ -17,7 +17,7 @@ export default {
     name:'MusicSelection',
     data(){
         return{
-            songs:[sawtooth],
+            songs:[''],
             selectedSong:''
         }
 

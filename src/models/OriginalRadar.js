@@ -1,4 +1,7 @@
 import P5 from 'p5';
+import "../p5.sound.js";
+
+
 
 let p5;
 let fft;
@@ -23,6 +26,7 @@ export function main(_p5) {
     // p5.ellipse(p5.width / 2, p5.height / 2, 500, 500);
     p5.background(100);
     radius = 0;
+    fft = new P5.FFT();
   };
   p5.draw = () => {
     p5.background(51);
@@ -33,7 +37,6 @@ export function main(_p5) {
     p5.translate(0, p5.height / 2);
     //controls size of ellipse
     p5.ellipse(posX, posY, 50, 50);
-    p5.pop();
     posX += speed;
     if (posX > p5.width || posX < 0) {
       speed *= -1;
