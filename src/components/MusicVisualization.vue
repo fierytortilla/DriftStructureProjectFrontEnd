@@ -1,14 +1,15 @@
 <template> 
 <div>
-    
+
 </div>
 </template>
 
 <script>
 import P5 from 'p5';
+import { eventBus } from '@/main.js';
 
-var radar = require("../models/DriftStructure.js");
-var radar2 = require("../models/OriginalRadar.js");
+
+var driftStructure = require("../models/DriftStructure.js");
 
 
 export default {
@@ -19,8 +20,11 @@ export default {
       } 
   },
   mounted() {
-    new P5(radar.main);
-    // radar2.setDelegate(this.callBackOnP5);
+    // new P5(driftStructure.main);
+    eventBus.$on('song-selected', (songURL)=>{
+        this.message= songURL;
+        new P5(driftStructure.main(songURL));
+    })
   },
   methods: {
       callBackOnP5: function(timeStr){

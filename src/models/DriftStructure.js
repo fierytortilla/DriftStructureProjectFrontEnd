@@ -6,14 +6,15 @@ let fft;
 let delegate;
 let sound;
 
-export function main(_p5) {
-  p5 = _p5;
+export function main(songURL) {
+  // p5 = _p5;
+  return function(p5) {
 
   p5.preload= ()=>{
     p5.soundFormats('mp3', 'ogg');
     // sound = p5.loadSound("../assets/sawtooth.mp3");
-    sound = p5.loadSound("https://upload.wikimedia.org/wikipedia/commons/1/1a/Am%C5%93ba_-_someday_i_will_be_like_noraus..ogg")
-    // sound = p5.SoundFile("../assets/sawtooth")     
+    // sound = p5.loadSound("https://upload.wikimedia.org/wikipedia/commons/1/1a/Am%C5%93ba_-_someday_i_will_be_like_noraus..ogg")
+    sound= p5.loadSound(songURL);
   }
 
   p5.setup = () => {
@@ -22,6 +23,7 @@ export function main(_p5) {
     // p5.ellipse(p5.width / 2, p5.height / 2, 500, 500);
     p5.background(100);
     fft = new P5.FFT();
+    // sound.stop();
     sound.play();
     // fft.setInput("../assets/sawtooth.mp3")
     sound.setVolume(0.1);
@@ -50,6 +52,7 @@ export function main(_p5) {
 
     notifyCurrentTime();
   };
+}
 }
 
 function notifyCurrentTime() {
