@@ -4,10 +4,10 @@ var sliderRate;
 var sliderPan;
 
 function setup() {
-  createCanvas(200, 200);
+  p5.createCanvas(200, 200);
   song = loadSound('../assets/sawtooth.mp3', loaded);
   //song.setVolume(0.5);
-  button = createButton('toggle');
+  button = p5.createButton('toggle');
   button.mousePressed(toggleSong);
   sliderVolume = createSlider(0, 1, 0.5, 0.01);
   sliderRate = createSlider(0, 1.5, 1, 0.01);

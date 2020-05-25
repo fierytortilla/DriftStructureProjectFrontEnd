@@ -22,6 +22,26 @@ export default {
             {
                 name: 'wuthering heights',
                 url: "https://upload.wikimedia.org/wikipedia/en/2/20/Kate_Bush_Wuthering_Heights_Sample.ogg"
+            },
+            {
+                name: 'akira',
+                url: 'http://localhost:3000/media/akira'
+            },
+            {
+                name: 'beamingHusband',
+                url: 'http://localhost:3000/media/beamingHusband'
+            },
+            {
+                name: 'dheirichMiMochMadainnCheothar',
+                url: 'http://localhost:3000/media/dheirichMiMochMadainnCheothar'
+            },
+            {
+                name: 'pretendYouDidntKnow',
+                url: 'http://localhost:3000/media/pretendYouDidntKnow'
+            },
+            {
+                name: 'sounded',
+                url: 'http://localhost:3000/media/sounded'
             }],
             selectedSongURL:'https://upload.wikimedia.org/wikipedia/commons/1/1a/Am%C5%93ba_-_someday_i_will_be_like_noraus..ogg'
         }

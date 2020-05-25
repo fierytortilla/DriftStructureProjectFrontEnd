@@ -10,8 +10,8 @@ import "../p5.sound.js";
 import { eventBus } from '@/main.js';
 
 
-var driftStructure = require("../models/DriftStructure.js");
-
+let driftStructure = require("../models/DriftStructure.js");
+let musicSettingsScript = require("../models/MusicSettingsScript")
 
 export default {
   name: "MusicVisualization",
@@ -23,7 +23,7 @@ export default {
   mounted() {
     eventBus.$on('song-selected', (songURL)=>{
         this.message= songURL;
-        new P5(driftStructure.main(songURL));
+        new P5(musicSettingsScript.main(songURL));
     })
   },
   methods: {

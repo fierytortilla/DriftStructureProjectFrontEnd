@@ -1,39 +1,42 @@
 import P5 from 'p5';
 import "../p5.sound.js";
 
-let p5;
-let fft;
-let delegate;
-let sound;
-// let button;
+let p5
+let fft
+let delegate
+let sound
+let sliderVolume
+let sliderRate
+let sliderPan
+let button
 
-export function main(songURL) {
+export function main(soundURL) {
   // p5 = _p5;
   return function(p5) {
 
   p5.preload= ()=>{
     p5.soundFormats('mp3', 'ogg');
-    // sound = p5.loadSound("../assets/heat");
-    // console.dir(sound, {depth:null});
-    // sound = p5.loadSound("https://upload.wikimedia.org/wikipedia/commons/1/1a/Am%C5%93ba_-_someday_i_will_be_like_noraus..ogg")
-    // sound= p5.loadSound("http://localhost:3000/media/akira.mp3");
-    sound= p5.loadSound(songURL);
+    sound= p5.loadSound(soundURL);
   }
 
   p5.setup = () => {
     p5.createCanvas(500, 500);
+    button = p5.createButton('toggle');
+    button.mousePressed(togglesound);
+    sliderVolume = p5.createSlider(0, 1, 0.5, 0.01);
     // p5.ellipse(p5.width / 2, p5.height / 2, 500, 500);
     p5.background(100);
     fft = new P5.FFT();
     // button = p5.createButton('toggle');
-    // button.mousePressed(toggleSong);
+    // button.mousePressed(togglesound);
     // sound.stop();
     sound.play();
     // fft.setInput("../assets/sawtooth.mp3")
-    sound.setVolume(0.1);
+    // sound.setVolume(0.1);
   };
   p5.draw = () => {
     p5.background(100);
+    sound.setVolume(sliderVolume.value());
     let spectrum = fft.analyze();
     p5.noStroke();
     p5.fill(255, 0, 255);
@@ -66,14 +69,14 @@ function notifyCurrentTime() {
   }
 }
 
-// function toggleSong() {
-//   if (song.isPlaying()) {
-//     song.pause();
-//   } else {
-//     song.play();
-//   }
-// }
+function loaded() {
+  sound.play();
+}
 
-export function setDelegate(_delegate) {
-  delegate = _delegate;
+function togglesound() {
+  if (sound.isPlaying()) {
+    sound.pause();
+  } else {
+    sound.play();
+  }
 }

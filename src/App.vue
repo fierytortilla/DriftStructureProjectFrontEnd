@@ -4,6 +4,7 @@
     <h1>DRIFT STRUCTURE</h1>
     <music-selection />
     <music-visualization />
+    <!-- <potential-vue-p5 /> -->
   </div>
 </template>
 
@@ -12,6 +13,9 @@ import { eventBus } from '@/main.js';
 import MusicSettingsController from '@/components/MusicSettingsController.vue';
 import MusicVisualization from './components/MusicVisualization.vue';
 import MusicSelection from './components/MusicSelection.vue';
+import PotentialVueP5Component from './components/PotentialVueP5Component.vue';
+import P5 from 'p5';
+
 
 export default {
   name: 'App',
@@ -23,7 +27,8 @@ export default {
   components: {
     // 'music-settings-controller':MusicSettingsController,
     'music-visualization': MusicVisualization,
-    'music-selection': MusicSelection
+    'music-selection': MusicSelection,
+    'potential-vue-p5': PotentialVueP5Component
   }
 }
 </script>
