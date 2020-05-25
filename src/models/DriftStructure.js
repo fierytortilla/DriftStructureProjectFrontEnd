@@ -59,8 +59,6 @@ export function main(soundURL) {
         _p5.vertex(x, y);
       }
       _p5.endShape();
-
-      notifyCurrentTime();
     };
   };
 }
