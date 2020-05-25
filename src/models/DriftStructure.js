@@ -12,8 +12,10 @@ export function main(songURL) {
 
   p5.preload= ()=>{
     p5.soundFormats('mp3', 'ogg');
-    // sound = p5.loadSound("../assets/sawtooth.mp3");
+    // sound = p5.loadSound("../assets/heat");
+    // console.dir(sound, {depth:null});
     // sound = p5.loadSound("https://upload.wikimedia.org/wikipedia/commons/1/1a/Am%C5%93ba_-_someday_i_will_be_like_noraus..ogg")
+    // sound= p5.loadSound("http://localhost:3000/media/heat.mp3");
     sound= p5.loadSound(songURL);
   }
 
