@@ -21,15 +21,15 @@ export default {
   },
   mounted() {
     eventBus.$on('song-selected', (songURL)=>{
-        let dict = {}
+        let p5Instance
         if(!this.currentlyPlayingSong){
-            dict.p5Instance = new P5(driftStructure.main(songURL));
+            p5Instance = new P5(driftStructure.main(songURL));
             this.currentlyPlayingSong= songURL;
         } else if (this.currentlyPlayingSong === songURL) {
             return
         } else if (this.currentlyPlayingSong !== songURL) {
             driftStructure.cleanup()
-            dict.p5Instance = new P5(driftStructure.main(songURL));
+            p5Instance = new P5(driftStructure.main(songURL));
             this.currentlyPlayingSong= songURL;
         }
     })
