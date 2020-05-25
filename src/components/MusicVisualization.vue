@@ -6,6 +6,7 @@
 
 <script>
 import P5 from 'p5';
+import "../p5.sound.js";
 import { eventBus } from '@/main.js';
 
 
@@ -20,7 +21,6 @@ export default {
       } 
   },
   mounted() {
-    // new P5(driftStructure.main);
     eventBus.$on('song-selected', (songURL)=>{
         this.message= songURL;
         new P5(driftStructure.main(songURL));

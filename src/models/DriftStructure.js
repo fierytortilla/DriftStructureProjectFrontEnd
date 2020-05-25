@@ -5,6 +5,7 @@ let p5;
 let fft;
 let delegate;
 let sound;
+// let button;
 
 export function main(songURL) {
   // p5 = _p5;
@@ -21,10 +22,11 @@ export function main(songURL) {
 
   p5.setup = () => {
     p5.createCanvas(500, 500);
-    //canvas.parent("p5Canvas");
     // p5.ellipse(p5.width / 2, p5.height / 2, 500, 500);
     p5.background(100);
     fft = new P5.FFT();
+    // button = p5.createButton('toggle');
+    // button.mousePressed(toggleSong);
     // sound.stop();
     sound.play();
     // fft.setInput("../assets/sawtooth.mp3")
@@ -63,6 +65,14 @@ function notifyCurrentTime() {
     delegate(message);
   }
 }
+
+// function toggleSong() {
+//   if (song.isPlaying()) {
+//     song.pause();
+//   } else {
+//     song.play();
+//   }
+// }
 
 export function setDelegate(_delegate) {
   delegate = _delegate;
