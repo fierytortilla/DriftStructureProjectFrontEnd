@@ -11,19 +11,27 @@ import { eventBus } from '@/main.js';
 
 
 let driftStructure = require("../models/DriftStructure.js");
-let musicSettingsScript = require("../models/MusicSettingsScript")
 
 export default {
   name: "MusicVisualization",
   data(){
       return{
-          message: ""
+          currentlyPlayingSong: ""
       } 
   },
   mounted() {
     eventBus.$on('song-selected', (songURL)=>{
-        this.message= songURL;
-        new P5(musicSettingsScript.main(songURL));
+        let dict = {}
+        if(!this.currentlyPlayingSong){
+            dict.p5Instance = new P5(driftStructure.main(songURL));
+            this.currentlyPlayingSong= songURL;
+        } else if (this.currentlyPlayingSong === songURL) {
+            return
+        } else if (this.currentlyPlayingSong !== songURL) {
+            driftStructure.cleanup()
+            dict.p5Instance = new P5(driftStructure.main(songURL));
+            this.currentlyPlayingSong= songURL;
+        }
     })
   },
   methods: {
