@@ -8,7 +8,6 @@
 </template>
 
 <script>
-// const sawtooth = require('../assets/sawtooth.mp3')
 import { eventBus } from '@/main.js';
 
 export default {
@@ -28,16 +27,16 @@ export default {
                 url: 'http://localhost:3000/media/akira'
             },
             {
-                name: 'beamingHusband',
+                name: 'beaming husband',
                 url: 'http://localhost:3000/media/beamingHusband'
             },
             {
-                name: 'dheirichMiMochMadainnCheothar',
+                name: 'dheirich mi moch madainn cheothar',
                 url: 'http://localhost:3000/media/dheirichMiMochMadainnCheothar'
             },
             {
-                name: 'pretendYouDidntKnow',
-                url: 'http://localhost:3000/media/pretendYouDidntKnow'
+                name: "bit about yourself",
+                url: 'http://localhost:3000/media/bitAboutYourself.mp3'
             },
             {
                 name: 'sounded',

@@ -24,19 +24,22 @@ export function main(soundURL) {
 
     p5.setup = () => {
       let canvas = p5.createCanvas(500, 500);
-      canvas.position(200,400);
+      canvas.position(200,300);
       canvas.center('horizontal');
       p5.textSize(40);
       sliderVolume = p5.createSlider(0, 1, 0.5, 0.01);
-      sliderVolume.position(400,920);
+      sliderVolume.position(400,805);
       sliderVolume.center('horizontal');
       button = p5.createButton("Pause");
-      volumeLabel= p5.createButton("Volume");
+      let div = p5.createDiv('');
+      div.html('Volume');
+      div.position(320, 805);
+      div.style('font-family', 'Avenir, Helvetica, Arial, sans-serif');
       button.mousePressed(toggleSound);
-      button.position(420,950);
-      button.center('horizontal');
-      volumeLabel.position(320, 905)
-      volumeLabel.center('horizontal');
+      button.position(550,805);
+      button.style('font-size', '12px')
+      button.style('font-family', 'Avenir, Helvetica, Arial, sans-serif');
+      button.style('background-color', 'grey');
       // _p5.ellipse(_p5.width / 2, _p5.height / 2, 500, 500);
       p5.background(100);
       fft = new P5.FFT();
