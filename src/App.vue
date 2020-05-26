@@ -13,7 +13,6 @@ import { eventBus } from '@/main.js';
 import MusicSettingsController from '@/components/MusicSettingsController.vue';
 import MusicVisualization from './components/MusicVisualization.vue';
 import MusicSelection from './components/MusicSelection.vue';
-import PotentialVueP5Component from './components/PotentialVueP5Component.vue';
 import P5 from 'p5';
 
 
@@ -27,9 +26,8 @@ export default {
   components: {
     // 'music-settings-controller':MusicSettingsController,
     'music-visualization': MusicVisualization,
-    'music-selection': MusicSelection,
-    'potential-vue-p5': PotentialVueP5Component
-  }
+    'music-selection': MusicSelection
+    }
 }
 </script>
 
@@ -42,4 +40,10 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+
+music-visualization{
+  justify-content: center;
+  align-items: center;
+}
+
 </style>

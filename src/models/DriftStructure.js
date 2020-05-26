@@ -2,71 +2,76 @@ import P5 from "p5";
 import "../p5.sound.js";
 
 let fft;
-let delegate;
 let sound;
 let sliderVolume;
 let button;
-let _p5;
+let p5;
+let settingsDiv;
 
 export function cleanup() {
   sound.stop();
-  _p5.remove();
+  p5.remove();
 }
 
 export function main(soundURL) {
-  return function(p5) {
-    _p5 = p5;
+  return function(_p5) {
+    p5 = _p5;
 
-    _p5.preload = () => {
-      _p5.soundFormats("mp3", "ogg");
-      sound = _p5.loadSound(soundURL);
+    p5.preload = () => {
+      p5.soundFormats("mp3", "ogg");
+      sound = p5.loadSound(soundURL);
     };
 
-    _p5.setup = () => {
-      _p5.createCanvas(500, 500);
-      button = _p5.createButton("toggle");
-      button.mousePressed(togglesound);
-      sliderVolume = _p5.createSlider(0, 1, 0.5, 0.01);
+    p5.setup = () => {
+      let canvas = p5.createCanvas(500, 500);
+      canvas.position(200,400);
+      // canvas.align(CENTER, CENTER);
+      // p5.text("Volume", 380, 900);
+      // p5.textAlign(p5.CENTER, p5.CENTER);
+      sliderVolume = p5.createSlider(0, 1, 0.5, 0.01);
+      sliderVolume.position(400,900);
+      button = p5.createButton("Pause");
+      button.mousePressed(toggleSound);
+      button.position(420,930);
       // _p5.ellipse(_p5.width / 2, _p5.height / 2, 500, 500);
-      _p5.background(100);
+      p5.background(100);
       fft = new P5.FFT();
-      // button = _p5.createButton('toggle');
-      // button.mousePressed(togglesound);
-      // sound.stop();
       sound.play();
-      // fft.setInput("../assets/sawtooth.mp3")
-      // sound.setVolume(0.1);
     };
-    _p5.draw = () => {
-      _p5.background(100);
+
+    p5.draw = () => {
+      p5.background(100);
+      p5.text("Volume", 380, 900);
       sound.setVolume(sliderVolume.value());
       let spectrum = fft.analyze();
-      _p5.noStroke();
-      _p5.fill(255, 0, 255);
+      p5.noStroke();
+      p5.fill(255, 0, 255);
       for (let i = 0; i < spectrum.length; i++) {
-        let x = _p5.map(i, 0, spectrum.length, 0, _p5.width);
-        let h = -_p5.height + _p5.map(spectrum[i], 0, 255, _p5.height, 0);
-        _p5.rect(x, _p5.height, _p5.width / spectrum.length, h);
+        let x = p5.map(i, 0, spectrum.length, 0, p5.width);
+        let h = -p5.height + p5.map(spectrum[i], 0, 255, p5.height, 0);
+        p5.rect(x, p5.height, p5.width / spectrum.length, h);
       }
 
       let waveform = fft.waveform();
-      _p5.noFill();
-      _p5.beginShape();
-      _p5.stroke(20);
+      p5.noFill();
+      p5.beginShape();
+      p5.stroke(20);
       for (let i = 0; i < waveform.length; i++) {
-        let x = _p5.map(i, 0, waveform.length, 0, _p5.width);
-        let y = _p5.map(waveform[i], -1, 1, 0, _p5.height);
-        _p5.vertex(x, y);
+        let x = p5.map(i, 0, waveform.length, 0, p5.width);
+        let y = p5.map(waveform[i], -1, 1, 0, p5.height);
+        p5.vertex(x, y);
       }
-      _p5.endShape();
+      p5.endShape();
     };
   };
 }
 
-function togglesound() {
+function toggleSound() {
   if (sound.isPlaying()) {
     sound.pause();
+    button.elt.firstChild.data = "Play";
   } else {
     sound.play();
+    button.elt.firstChild.data = "Pause";
   }
 }

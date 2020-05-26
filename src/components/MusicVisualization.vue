@@ -41,4 +41,11 @@ export default {
 };
 </script>
 
-<style scoped></style>
+
+<style scoped>
+
+/* div{
+    align-items:center;
+} */
+
+</style>
