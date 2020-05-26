@@ -10,8 +10,7 @@
     "canvas": "^2.6.1",
     "core-js": "^3.6.4",
     "p5": "^1.0.0",
-    "vue": "^2.6.11",
-    "vue-p5": "^0.8.3"
+    "vue": "^2.6.11"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.3.0",

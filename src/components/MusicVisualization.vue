@@ -6,7 +6,6 @@
 
 <script>
 import P5 from 'p5';
-import "../p5.sound.js";
 import { eventBus } from '@/main.js';
 
 
