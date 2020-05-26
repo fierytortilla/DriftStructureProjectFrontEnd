@@ -16,6 +16,7 @@
 
 <script>
 import { eventBus } from '@/main.js';
+import SongService from '../services/SongService.js'
 
 export default {
     name:'MusicSelection',
@@ -53,15 +54,7 @@ export default {
         }
     },
     async beforeMount() {
-        this.songs = await fetch('http://localhost:3000/media', {
-      method: 'GET',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    })
-    .then(res => res.json())
-    .catch(err => console.error(err))
+        this.songs = await SongService.getSongs()
     },
     mounted(){
 
