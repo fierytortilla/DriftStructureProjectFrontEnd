@@ -1,6 +1,7 @@
 <template> 
 <div>
-
+    <!-- {{p5Instance}} -->
+    <!-- <label v-if="p5Instance">Volume</label> -->
 </div>
 </template>
 
@@ -15,20 +16,21 @@ export default {
   name: "MusicVisualization",
   data(){
       return{
-          currentlyPlayingSong: ""
+          currentlyPlayingSong: "",
+          p5Instance: null
       } 
   },
   mounted() {
     eventBus.$on('song-selected', (songURL)=>{
-        let p5Instance
+        // let p5Instance
         if(!this.currentlyPlayingSong){
-            p5Instance = new P5(driftStructure.main(songURL));
+            this.p5Instance = new P5(driftStructure.main(songURL));
             this.currentlyPlayingSong= songURL;
         } else if (this.currentlyPlayingSong === songURL) {
             return
         } else if (this.currentlyPlayingSong !== songURL) {
             driftStructure.cleanup()
-            p5Instance = new P5(driftStructure.main(songURL));
+            this.p5Instance = new P5(driftStructure.main(songURL));
             this.currentlyPlayingSong= songURL;
         }
     })
@@ -44,8 +46,9 @@ export default {
 
 <style scoped>
 
-/* div{
-    align-items:center;
-} */
+label {
+    text-align: left;
+
+}
 
 </style>

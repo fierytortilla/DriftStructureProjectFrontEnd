@@ -6,7 +6,7 @@ let sound;
 let sliderVolume;
 let button;
 let p5;
-let settingsDiv;
+let volumeLabel;
 
 export function cleanup() {
   sound.stop();
@@ -25,14 +25,18 @@ export function main(soundURL) {
     p5.setup = () => {
       let canvas = p5.createCanvas(500, 500);
       canvas.position(200,400);
-      // canvas.align(CENTER, CENTER);
-      // p5.text("Volume", 380, 900);
-      // p5.textAlign(p5.CENTER, p5.CENTER);
+      canvas.center('horizontal');
+      p5.textSize(40);
       sliderVolume = p5.createSlider(0, 1, 0.5, 0.01);
-      sliderVolume.position(400,900);
+      sliderVolume.position(400,920);
+      sliderVolume.center('horizontal');
       button = p5.createButton("Pause");
+      volumeLabel= p5.createButton("Volume");
       button.mousePressed(toggleSound);
-      button.position(420,930);
+      button.position(420,950);
+      button.center('horizontal');
+      volumeLabel.position(320, 905)
+      volumeLabel.center('horizontal');
       // _p5.ellipse(_p5.width / 2, _p5.height / 2, 500, 500);
       p5.background(100);
       fft = new P5.FFT();
@@ -41,7 +45,6 @@ export function main(soundURL) {
 
     p5.draw = () => {
       p5.background(100);
-      p5.text("Volume", 380, 900);
       sound.setVolume(sliderVolume.value());
       let spectrum = fft.analyze();
       p5.noStroke();
