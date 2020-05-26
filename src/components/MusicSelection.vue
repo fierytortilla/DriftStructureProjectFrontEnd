@@ -9,7 +9,7 @@
 
 <script>
 import { eventBus } from '@/main.js';
-import SongService from '@../services/SongService.js';
+import SongService from '../services/SongService.js';
 
 export default {
     name:'MusicSelection',

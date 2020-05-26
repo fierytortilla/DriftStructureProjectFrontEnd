@@ -1,4 +1,4 @@
-const baseURL = 'http://localhost:3000/media/scores/'
+const baseURL = 'http://localhost:3000/media/'
 
 
 export default {
@@ -6,7 +6,7 @@ export default {
     return fetch(baseURL)
     .then(res => res.json())
   },
-  postScore(payload){
+  postSong(payload){
     return fetch(baseURL, {
       method: 'POST',
       body: JSON.stringify(payload),
@@ -14,15 +14,15 @@ export default {
     })
     .then(res => res.json())
   },
-  updateScore(score) {
-    return fetch(baseURL + score._id, {
+  updateSong(song) {
+    return fetch(baseURL + song._id, {
       method: 'PUT',
-      body: JSON.stringify(score),
+      body: JSON.stringify(song),
       headers: { 'Content-Type': 'application/json' }
     })
       .then(res => res.json())
   },
-  deleteScore(id){
+  deleteSong(id){
     return fetch(baseURL + id, {
       method: 'DELETE'
     })
