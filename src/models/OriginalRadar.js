@@ -10,12 +10,10 @@ let sound;
 
 const circleNum = 100;
 const degree = 360 / circleNum;
-const degree2 = 360 / circleNum;
 const spinNum = 4;
 
 let radius = 50;
 var speed = 2;
-var speed2 = 2;
 var posX = 0;
 
 export function main(_p5) {

@@ -7,6 +7,14 @@ let sliderVolume;
 let button;
 let p5;
 
+const circleNum = 100;
+const degree = 360 / circleNum;
+const spinNum = 4;
+
+let radius = 50;
+var speed = 2;
+var posX = 0;
+
 export function cleanup() {
   sound.stop();
   p5.remove();
@@ -49,6 +57,7 @@ export function main(soundURL) {
     p5.draw = () => {
       p5.background(100);
       sound.setVolume(sliderVolume.value());
+      //analyze() computes amplitude values along the frequency domain
       let spectrum = fft.analyze();
       p5.noStroke();
       p5.fill(255, 0, 255);
@@ -57,7 +66,7 @@ export function main(soundURL) {
         let h = -p5.height + p5.map(spectrum[i], 0, 255, p5.height, 0);
         p5.rect(x, p5.height, p5.width / spectrum.length, h);
       }
-
+      //waveform() computes amplitude values along the time domain
       let waveform = fft.waveform();
       p5.noFill();
       p5.beginShape();

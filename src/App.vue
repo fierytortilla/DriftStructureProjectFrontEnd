@@ -41,10 +41,9 @@ export default {
 body {
   background-color: darkturquoise;
   background-image: url('./assets/driftLogo.png');
-  height: 200%;
-  background-position: center;
+  background-position: top;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 75%;
 }
 
 music-visualization{
