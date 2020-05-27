@@ -4,7 +4,6 @@
     <h1>DRIFT STRUCTURE</h1>
     <music-selection />
     <music-visualization />
-    <!-- <potential-vue-p5 /> -->
   </div>
 </template>
 
