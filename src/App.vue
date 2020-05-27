@@ -39,6 +39,7 @@ export default {
 }
 
 body {
+  background-color: darkturquoise;
   background-image: url('./assets/driftLogo.png');
   height: 200%;
   background-position: center;

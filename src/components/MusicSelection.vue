@@ -34,9 +34,14 @@ export default {
             SongService.getSongs()
             .then(songsFromBackEnd=> this.songs=songsFromBackEnd)
         }
-
     }
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+
+select{
+    margin-right: 60px;
+}
+
+</style>
