@@ -16,7 +16,7 @@ const circleNum = 100;
 const degree = 360 / circleNum;
 const spinNum = 4;
 let radius= 50;
-let speed = 2;
+let speed = 10;
 
 export function cleanup() {
   sound.stop();
@@ -93,21 +93,29 @@ export function main(soundURL) {
 
       //analyze() computes amplitude values along the frequency domain
       let spectrum = fft.analyze();
+      //waveform() computes amplitude values along the time domain
+      let waveform = fft.waveform();
 
       //VISUAL SECTION 1:expanding and contracting elipstical visuals
       p5.push();
       p5.translate(p5.width / 2, p5.height / 2);
-      p5.noFill();
-      p5.stroke(255);
-      for (let i = 0, step = 0; i < 360 * spinNum; i += degree, step += 1) {
-        let rand = p5.random(125, 255);
+      // p5.noFill();
+      for (let i = 0, step = 0; i < 1024; i += degree, step += 1) {
+        let rand = p5.random(0, 255);
         const angle = p5.radians(i);
         let x = (radius + step) * p5.cos(angle);
         let y = (radius + step) * p5.sin(angle);
+        let fillGreen = p5.map(waveform[i], -1, 1, 0, 255);
+        let fillBlue = p5.map(waveform[i], -1, 1, 0, 255);
+
         p5.stroke(red, green, rand);
+        p5.fill(rand, fillGreen, fillBlue);
         p5.rotate(1);
-        p5.ellipse(x, y, 15, 15);
-        let r = p5.map(i, 0, 360 * spinNum, 0, 255);
+        // let randRadius = p5.random(15,20);
+        let randHeight = p5.random(15,20);
+        let randRadius = p5.map(waveform[i], -1, 1, 0, 50);
+        // let randHeight = p5.map(waveform[i], -1, 1, 0, 20);
+        p5.ellipse(x, y, randRadius, randHeight);
       }
       p5.pop();
       radius += speed;
@@ -156,9 +164,7 @@ export function main(soundURL) {
         p5.rect(x, p5.height, (p5.width) / spectrum.length, h);
         // p5.rect(x, p5.height, canvas.width/100, h, 20);
       }
-      //waveform() computes amplitude values along the time domain
       //VISUAL SECTION 4: speech waves
-      let waveform = fft.waveform();
       p5.noFill();
       p5.beginShape();
       for (let i = 0; i < spectrum.length; i++) {
