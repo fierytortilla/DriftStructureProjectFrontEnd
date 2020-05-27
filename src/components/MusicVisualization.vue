@@ -14,13 +14,12 @@ export default {
   name: "MusicVisualization",
   data(){
       return{
-          currentlyPlayingSong: "",
-          p5Instance: null
-      } 
+          currentlyPlayingSong: ""
+        } 
   },
   mounted() {
     eventBus.$on('song-selected', (songURL)=>{
-        // let p5Instance
+        let p5Instance
         if(!this.currentlyPlayingSong){
             this.p5Instance = new P5(driftStructure.main(songURL));
             this.currentlyPlayingSong= songURL;
