@@ -1,15 +1,22 @@
 import P5 from "p5";
 import "../p5.sound.js";
 
+let p5;
+let canvas
 let fft;
 let sound;
 let sliderVolume;
-let button;
-let p5;
+let buttonPausePlay;
+
+let sliderRed;
+let sliderGreen;
+let sliderBlue;
 
 const circleNum = 100;
 const degree = 360 / circleNum;
 const spinNum = 4;
+let radius= 50;
+let speed = 2;
 
 export function cleanup() {
   sound.stop();
@@ -26,95 +33,141 @@ export function main(soundURL) {
     };
 
     p5.setup = () => {
-      let canvas = p5.createCanvas(700, 500);
-      canvas.center('horizontal');
-      canvas.style('padding','5px');
-      canvas.style('opacity', '0.7');
+      canvas = p5.createCanvas(p5.windowWidth-100, p5.windowHeight-100);
+      canvas.center("horizontal");
+      canvas.style("padding", "5px");
+      canvas.style("opacity", "0.9");
       sliderVolume = p5.createSlider(0, 1, 0.5, 0.01);
-      let middleCanvasWidth = canvas.x + (canvas.width/2);
-      let bottomCanvasHeight= canvas.y + (canvas.height)+10;
-      sliderVolume.position(middleCanvasWidth, bottomCanvasHeight);
-      sliderVolume.center('horizontal');
-      sliderVolume.style('color', 'violet');
-      button = p5.createButton("Pause");
-      let div = p5.createDiv('');
-      div.html('Volume');
-      div.position(sliderVolume.x-60, bottomCanvasHeight);
-      div.style('font-family', 'Avenir, Helvetica, Arial, sans-serif');
-      div.style('color', 'violet');
-      button.mousePressed(toggleSound);
-      button.position(middleCanvasWidth+80, bottomCanvasHeight);
-      button.style('font-size', '15px')
-      button.style('font-family', 'Avenir, Helvetica, Arial, sans-serif');
-      button.style('background-color', 'darkslategrey');
-      button.style('color', 'violet');
-      // _p5.ellipse(_p5.width / 2, _p5.height / 2, 500, 500);
+      let middleCanvasWidth = canvas.x + canvas.width / 2;
+      let bottomCanvasHeight = canvas.y + canvas.height + 10;
+      sliderVolume.position(canvas.x+10, bottomCanvasHeight);
+      sliderVolume.center("horizontal");
+      sliderVolume.style("color", "violet");
+      buttonPausePlay = p5.createButton("Pause");
+      let divVolume = p5.createDiv("");
+      divVolume.html("Volume");
+      divVolume.position(sliderVolume.x - 60, bottomCanvasHeight);
+      divVolume.style("font-family", "Avenir, Helvetica, Arial, sans-serif");
+      divVolume.style("color", "violet");
+      buttonPausePlay.mousePressed(toggleSound);
+      buttonPausePlay.position(middleCanvasWidth + 80, bottomCanvasHeight);
+      buttonPausePlay.style("font-size", "15px");
+      buttonPausePlay.style("font-family", "Avenir, Helvetica, Arial, sans-serif");
+      buttonPausePlay.style("background-color", "darkslategrey");
+      buttonPausePlay.style("color", "violet");
+
+      sliderRed = p5.createSlider(0, 255, 25);
+      sliderGreen = p5.createSlider(0, 255, 125);
+      sliderBlue = p5.createSlider(0, 255, 125);
+      sliderRed.position(canvas.width-60, canvas.y);
+      sliderGreen.position(canvas.width-60, sliderRed.y+20);
+      sliderBlue.position(canvas.width-60, sliderGreen.y+20);
+
+      let divRed = p5.createDiv("");
+      let divGreen = p5.createDiv("");
+      let divBlue = p5.createDiv("");
+      divRed.html("Red");
+      divGreen.html("Green");
+      divBlue.html("Blue");
+      divRed.position(sliderRed.x - 44, canvas.y);
+      divRed.style("font-family", "Avenir, Helvetica, Arial, sans-serif");
+      divRed.style("color", "red");
+      divGreen.position(sliderRed.x - 44, sliderGreen.y-2);
+      divGreen.style("font-family", "Avenir, Helvetica, Arial, sans-serif");
+      divGreen.style("color", "green");
+      divBlue.position(sliderRed.x - 44, sliderBlue.y-2);
+      divBlue.style("font-family", "Avenir, Helvetica, Arial, sans-serif");
+      divBlue.style("color", "blue");
+
+
       fft = new P5.FFT();
-      // p5.angleMode(DEGREES);
       sound.play();
     };
 
     p5.draw = () => {
-      // p5.background('#222222');
-      p5.background('#2F4F4F');
+      p5.background("#2F4F4F");
       sound.setVolume(sliderVolume.value());
+      const red = sliderRed.value();
+      const green = sliderGreen.value();
+      const blue = sliderBlue.value();
+
       //analyze() computes amplitude values along the frequency domain
       let spectrum = fft.analyze();
-      // console.log(spectrum);
-      // p5.push();
-      // let degree = p5.frameCount * 3;
-      // let posX = 0;
-      // let posY = p5.sin(p5.radians(degree)) * 50;
-      // let radius = 50;
-      // let speed = 2;
-      // p5.ellipse(posX, posY, 50, 50);
-      // p5.translate(0, p5.height);
-      // posX += speed;
-      // if (posX > p5.width || posX < 0) {
-      //   p5.stroke(posX)
-      //   speed *= -1;
-      // }
-      // p5.pop();
+
+      //VISUAL SECTION 1:expanding and contracting elipstical visuals
       p5.push();
       p5.translate(p5.width / 2, p5.height / 2);
+      p5.noFill();
+      p5.stroke(255);
+      for (let i = 0, step = 0; i < 360 * spinNum; i += degree, step += 1) {
+        let rand = p5.random(125, 255);
+        const angle = p5.radians(i);
+        let x = (radius + step) * p5.cos(angle);
+        let y = (radius + step) * p5.sin(angle);
+        p5.stroke(red, green, rand);
+        p5.rotate(1);
+        p5.ellipse(x, y, 15, 15);
+        let r = p5.map(i, 0, 360 * spinNum, 0, 255);
+      }
+      p5.pop();
+      radius += speed;
+      if (radius > 360 || radius < -360 * 2) {
+        speed *= -1;
+      }
+
+      //VISUAL SECTION 2: center of extending light
+      p5.push();
+      p5.translate(p5.width / 2, p5.height / 2);
+      // console.log(spectrum.length);
       for (var i = 0; i < spectrum.length; i++) {
         // p5.background(i);
-        var angle = p5.map(i, 0, spectrum.length, 0, 360);
-        var amp = spectrum[i];
-        var r = p5.map(amp, 0, 256, 20, 100);
+        let angle = p5.map(i, 0, spectrum.length, 0, 360);
+        let amp = spectrum[i];
+        let r = p5.map(amp, 0, 256, 0, 100);
         p5.fill(i, 255, 255);
-        var x = r * p5.cos(angle);
-        var y = r * p5.sin(angle);
-        p5.stroke(i, 255, 255);
-        p5.line(0, 0, x, y);
+        let x = r * p5.cos(angle);
+        let y = r * p5.sin(angle);
+        let rand= p5.random(255);
+        // p5.stroke(r, rand, r, r);
+        let randRed = p5.random(255);
+        let randGreen = p5.random(125);
+        let randBlue = p5.random(125, 255);
+        p5.stroke(i, rand, blue, rand);
+        p5.line(0, 0, x * 5, y * 5);
+        // line.fill(i);
         // p5.vertex(x, y);
         //var y = map(amp, 0, 256, height, 0);
         // p5.rect(i * w, y, w - 2, p5.height - y);
       }
       p5.pop();
 
-
-
+      //VISUAL SECTION 3: traditional freq vs amplitude
       p5.noStroke();
-      p5.fill(255, 0, 255);
+      // p5.fill(255, 0, 255);
       for (let i = 0; i < spectrum.length; i++) {
-        p5.fill(255, 0, 255);
+        let randRed = p5.random(255);
+        let randGreen = p5.random(125);
+        let randBlue = p5.random(125, 255);
+        // p5.fill(255, randGreen, randBlue);
+        p5.fill(red, green, blue);
         let x = p5.map(i, 0, spectrum.length, 0, p5.width);
         let h = -p5.height + p5.map(spectrum[i], 0, 255, p5.height, 0);
         //for rect: posX, posY, width, height
-        p5.rect(x, p5.height, (p5.width+1) / spectrum.length, h);
+        p5.rect(x, p5.height, (p5.width) / spectrum.length, h);
+        // p5.rect(x, p5.height, canvas.width/100, h, 20);
       }
       //waveform() computes amplitude values along the time domain
+      //VISUAL SECTION 4: speech waves
       let waveform = fft.waveform();
       p5.noFill();
       p5.beginShape();
-      p5.stroke('#fae');
       for (let i = 0; i < spectrum.length; i++) {
         let x = p5.map(i, 0, waveform.length, 0, p5.width);
         let y = p5.map(waveform[i], -1, 1, 0, p5.height);
-        // p5.vertex(x, y);
+        p5.vertex(x, y);
         // p5.fill(i);
-        p5.stroke(i);
+        let rand = p5.random(255);
+        p5.stroke(red, green, blue, rand);
       }
       p5.endShape();
     };
@@ -124,9 +177,9 @@ export function main(soundURL) {
 function toggleSound() {
   if (sound.isPlaying()) {
     sound.pause();
-    button.elt.firstChild.data = "Play";
+    buttonPausePlay.elt.firstChild.data = "Play";
   } else {
     sound.play();
-    button.elt.firstChild.data = "Pause";
+    buttonPausePlay.elt.firstChild.data = "Pause";
   }
 }

@@ -43,10 +43,4 @@ export default {
 
 <style scoped>
 
-label {
-    text-align: left;
-
-}
-
-
 </style>

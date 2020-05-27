@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <!-- <img alt="Vue logo" src="./assets/driftLogo.png"> -->
-    <h1>DRIFT STRUCTURE</h1>
-    <h3>VISUALIZE YOUR MUSIC</h3>
+    <h1 class="heading">DRIFT STRUCTURE</h1>
+    <h3 class="heading">VISUALIZE YOUR MUSIC</h3>
     <music-selection />
     <music-visualization />
   </div>
@@ -59,6 +59,10 @@ body::after{
   right: 0;
   position: absolute;
   z-index: -1;   
+}
+
+#heading{
+  margin-top:0;
 }
 
 music-visualization{
