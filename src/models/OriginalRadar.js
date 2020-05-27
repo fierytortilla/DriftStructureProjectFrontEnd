@@ -22,12 +22,12 @@ export function main(_p5) {
   p5.setup = () => {
     p5.createCanvas(500, 500);
     // p5.ellipse(p5.width / 2, p5.height / 2, 500, 500);
-    p5.background(100);
+    p5.background(1);
     radius = 0;
     fft = new P5.FFT();
   };
   p5.draw = () => {
-    p5.background(51);
+    p5.background(1);
     const degree = p5.frameCount * 3;
     const posY = p5.sin(p5.radians(degree)) * 50;
     p5.push();

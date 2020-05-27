@@ -2,6 +2,7 @@
   <div id="app">
     <!-- <img alt="Vue logo" src="./assets/driftLogo.png"> -->
     <h1>DRIFT STRUCTURE</h1>
+    <h3>VISUALIZE YOUR MUSIC</h3>
     <music-selection />
     <music-visualization />
   </div>
@@ -34,16 +35,30 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: darkslategray;
+  color: violet;
   margin-top: 20px;
 }
 
 body {
-  background-color: darkturquoise;
-  background-image: url('./assets/driftLogo.png');
+  background-color: darkslategray;
   background-position: top;
   background-repeat: no-repeat;
   background-size: 75%;
+}
+
+body::after{
+  content: "";
+  background: url('./assets/driftLogo.png');
+  background-size: 75%;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.5;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
 }
 
 music-visualization{

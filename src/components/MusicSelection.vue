@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label>Choose song to visualize: </label>
+    <label>Choose your song: </label>
     <select name="songs" v-on:change="handleSelectedSong" v-model="selectedSongURL">
       <option v-for="(song, index) in songs" :value="song.url" :key="index">{{song.title}} by {{song.artist}}</option>
     </select>
@@ -27,7 +27,6 @@ export default {
     },
     methods:{
         handleSelectedSong(){
-            console.log(this.selectedSongURL)
             eventBus.$emit('song-selected', this.selectedSongURL)
         },
         getSongs(){
