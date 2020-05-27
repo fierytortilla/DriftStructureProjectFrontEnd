@@ -6,7 +6,6 @@ let sound;
 let sliderVolume;
 let button;
 let p5;
-let volumeLabel;
 
 export function cleanup() {
   sound.stop();
@@ -24,20 +23,21 @@ export function main(soundURL) {
 
     p5.setup = () => {
       let canvas = p5.createCanvas(500, 500);
-      canvas.position(200,300);
       canvas.center('horizontal');
-      p5.textSize(40);
+      canvas.style('padding','10px');
       sliderVolume = p5.createSlider(0, 1, 0.5, 0.01);
-      sliderVolume.position(400,805);
+      let middleCanvasWidth = canvas.x + (canvas.width/2);
+      let bottomCanvasHeight= canvas.y + (canvas.height)+10;
+      sliderVolume.position(middleCanvasWidth, bottomCanvasHeight);
       sliderVolume.center('horizontal');
       button = p5.createButton("Pause");
       let div = p5.createDiv('');
       div.html('Volume');
-      div.position(320, 805);
+      div.position(sliderVolume.x-60, bottomCanvasHeight);
       div.style('font-family', 'Avenir, Helvetica, Arial, sans-serif');
       button.mousePressed(toggleSound);
-      button.position(550,805);
-      button.style('font-size', '12px')
+      button.position(middleCanvasWidth+80, bottomCanvasHeight);
+      button.style('font-size', '14px')
       button.style('font-family', 'Avenir, Helvetica, Arial, sans-serif');
       button.style('background-color', 'grey');
       // _p5.ellipse(_p5.width / 2, _p5.height / 2, 500, 500);

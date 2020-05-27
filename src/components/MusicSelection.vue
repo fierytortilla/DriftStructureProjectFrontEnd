@@ -1,6 +1,6 @@
 <template>
   <div>
-    <label>Choose song to visualize </label>
+    <label>Choose song to visualize: </label>
     <select name="songs" v-on:change="handleSelectedSong" v-model="selectedSongURL">
       <option v-for="(song, index) in songs" :value="song.url" :key="index">{{song.title}} by {{song.artist}}</option>
     </select>

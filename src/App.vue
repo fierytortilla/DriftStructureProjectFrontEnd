@@ -28,14 +28,22 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: darkslategray;
   margin-top: 20px;
+}
+
+body {
+  background-image: url('./assets/driftLogo.png');
+  height: 200%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 music-visualization{
