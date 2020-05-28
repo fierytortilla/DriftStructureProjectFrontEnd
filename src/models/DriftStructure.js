@@ -165,7 +165,7 @@ export function main(soundURL) {
         // p5.fill(i);
         let rand = p5.random(255);
         p5.stroke(red, green, fillBlue, rand);
-        p5.strokeWeight(3);
+        p5.strokeWeight(2);
       }
       p5.endShape();
       p5.pop();
