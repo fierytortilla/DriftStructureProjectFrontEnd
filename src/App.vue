@@ -25,7 +25,7 @@ export default {
   components: {
     'music-visualization': MusicVisualization,
     'music-selection': MusicSelection
-    }
+  }
 }
 </script>
 
@@ -35,7 +35,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: violet;
+  color: rgb(247, 4, 4);
   margin-top: 20px;
 }
 
