@@ -16,7 +16,7 @@ const circleNum = 100;
 const degree = 360 / circleNum;
 const spinNum = 4;
 let radius= 50;
-let speed = 10;
+let speed = 7;
 
 export function cleanup() {
   sound.stop();
@@ -91,30 +91,26 @@ export function main(soundURL) {
       const green = sliderGreen.value();
       const blue = sliderBlue.value();
 
-      //analyze() computes amplitude values along the frequency domain
+      //analyze() computes amplitude values along the frequency domain, each value represents amplitude at that slice of the frequency spectrum
       let spectrum = fft.analyze();
-      //waveform() computes amplitude values along the time domain
+      //waveform() computes amplitude values along the time domain, each value represents amplitude of the waveform at that sample of time.
       let waveform = fft.waveform();
 
       //VISUAL SECTION 1:expanding and contracting elipstical visuals
       p5.push();
       p5.translate(p5.width / 2, p5.height / 2);
-      // p5.noFill();
-      for (let i = 0, step = 0; i < 1024; i += degree, step += 1) {
-        let rand = p5.random(0, 255);
+      for (let i = 0, step = 0; i < 360 * spinNum; i += degree, step += 1) {
         const angle = p5.radians(i);
         let x = (radius + step) * p5.cos(angle);
         let y = (radius + step) * p5.sin(angle);
-        let fillGreen = p5.map(waveform[i], -1, 1, 0, 255);
-        let fillBlue = p5.map(waveform[i], -1, 1, 0, 255);
-
-        p5.stroke(red, green, rand);
-        p5.fill(rand, fillGreen, fillBlue);
+        let fillRed= fft.getEnergy('highMid');
+        let fillGreen = fft.getEnergy('mid');
+        let fillBlue = fft.getEnergy('bass');
+        p5.stroke(red, green, blue);
+        p5.fill(fillRed, fillGreen, fillBlue);
         p5.rotate(1);
-        // let randRadius = p5.random(15,20);
+        let randRadius = p5.random(15,20);
         let randHeight = p5.random(15,20);
-        let randRadius = p5.map(waveform[i], -1, 1, 0, 50);
-        // let randHeight = p5.map(waveform[i], -1, 1, 0, 20);
         p5.ellipse(x, y, randRadius, randHeight);
       }
       p5.pop();
@@ -122,13 +118,10 @@ export function main(soundURL) {
       if (radius > 360 || radius < -360 * 2) {
         speed *= -1;
       }
-
       //VISUAL SECTION 2: center of extending light
       p5.push();
       p5.translate(p5.width / 2, p5.height / 2);
-      // console.log(spectrum.length);
       for (var i = 0; i < spectrum.length; i++) {
-        // p5.background(i);
         let angle = p5.map(i, 0, spectrum.length, 0, 360);
         let amp = spectrum[i];
         let r = p5.map(amp, 0, 256, 0, 100);
@@ -136,44 +129,39 @@ export function main(soundURL) {
         let x = r * p5.cos(angle);
         let y = r * p5.sin(angle);
         let rand= p5.random(255);
-        // p5.stroke(r, rand, r, r);
-        let randRed = p5.random(255);
-        let randGreen = p5.random(125);
-        let randBlue = p5.random(125, 255);
-        p5.stroke(i, rand, blue, rand);
+        let fillGreen = fft.getEnergy('mid');
+        let fillBlue = fft.getEnergy('bass');
+        p5.stroke(i, fillGreen, blue, rand);
         p5.line(0, 0, x * 5, y * 5);
-        // line.fill(i);
-        // p5.vertex(x, y);
-        //var y = map(amp, 0, 256, height, 0);
-        // p5.rect(i * w, y, w - 2, p5.height - y);
       }
       p5.pop();
 
       //VISUAL SECTION 3: traditional freq vs amplitude
       p5.noStroke();
-      // p5.fill(255, 0, 255);
       for (let i = 0; i < spectrum.length; i++) {
-        let randRed = p5.random(255);
-        let randGreen = p5.random(125);
-        let randBlue = p5.random(125, 255);
-        // p5.fill(255, randGreen, randBlue);
-        p5.fill(red, green, blue);
+        let fillGreen = fft.getEnergy('mid');
+        let fillBlue = fft.getEnergy('bass');
+        if(i%10==0){
+          p5.fill(red, green, blue);
+        } else {
+          p5.fill(red, fillGreen, fillBlue);
+        }
         let x = p5.map(i, 0, spectrum.length, 0, p5.width);
         let h = -p5.height + p5.map(spectrum[i], 0, 255, p5.height, 0);
-        //for rect: posX, posY, width, height
         p5.rect(x, p5.height, (p5.width) / spectrum.length, h);
-        // p5.rect(x, p5.height, canvas.width/100, h, 20);
       }
+
       //VISUAL SECTION 4: speech waves
       p5.noFill();
       p5.beginShape();
       for (let i = 0; i < spectrum.length; i++) {
+        let fillBlue = fft.getEnergy('bass');
         let x = p5.map(i, 0, waveform.length, 0, p5.width);
         let y = p5.map(waveform[i], -1, 1, 0, p5.height);
         p5.vertex(x, y);
         // p5.fill(i);
         let rand = p5.random(255);
-        p5.stroke(red, green, blue, rand);
+        p5.stroke(red, green, fillBlue, rand);
       }
       p5.endShape();
     };
