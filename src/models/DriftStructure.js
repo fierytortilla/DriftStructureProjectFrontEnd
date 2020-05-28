@@ -137,6 +137,7 @@ export function main(soundURL) {
       p5.pop();
 
       //VISUAL SECTION 3: traditional freq vs amplitude
+      p5.push();
       p5.noStroke();
       for (let i = 0; i < spectrum.length; i++) {
         let fillGreen = fft.getEnergy('mid');
@@ -150,8 +151,10 @@ export function main(soundURL) {
         let h = -p5.height + p5.map(spectrum[i], 0, 255, p5.height, 0);
         p5.rect(x, p5.height, (p5.width) / spectrum.length, h);
       }
+      p5.pop();
 
       //VISUAL SECTION 4: speech waves
+      p5.push();
       p5.noFill();
       p5.beginShape();
       for (let i = 0; i < spectrum.length; i++) {
@@ -162,8 +165,10 @@ export function main(soundURL) {
         // p5.fill(i);
         let rand = p5.random(255);
         p5.stroke(red, green, fillBlue, rand);
+        p5.strokeWeight(3);
       }
       p5.endShape();
+      p5.pop();
     };
   };
 }
