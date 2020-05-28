@@ -1,6 +1,7 @@
 <template> 
 <div>
-    <label>Choose your visual:  </label>
+    <label>Choose your visual(s):  </label>
+    </br>
     <label>expanding/contracting ellipticals</label>
     <input type="checkbox" v-model="currentlySelectedVisuals.visualSetting1" value=true>
     <label>center of sun</label>
@@ -56,8 +57,8 @@ export default {
 
 <style scoped>
 label{
-    display:inline-block;
-    color: black;
+    /* display:inline-block; */
+    color: rgb(149, 250, 149);
 }
 
 input{

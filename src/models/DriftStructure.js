@@ -16,7 +16,7 @@ const circleNum = 100;
 const degree = 360 / circleNum;
 const spinNum = 4;
 let radius= 50;
-let speed = 7;
+let speed = 6;
 
 export function cleanup() {
   sound.stop();
@@ -107,8 +107,9 @@ export function main(soundURL, currentlySelectedVisuals) {
           let fillRed= fft.getEnergy('highMid');
           let fillGreen = fft.getEnergy('mid');
           let fillBlue = fft.getEnergy('bass');
-          p5.stroke(red, green, blue);
-          p5.fill(fillRed, fillGreen, fillBlue);
+          p5.stroke(fillRed, fillGreen, fillBlue);
+          p5.strokeWeight(p5.map(fft.getEnergy('mid'), 0, 255, 2, 10));
+          p5.fill(red, green, blue);
           p5.rotate(1);
           let randRadius = p5.random(15,20);
           let randHeight = p5.random(15,20);
