@@ -1,7 +1,7 @@
 <template> 
 <div>
     <label>Choose your visual(s):  </label>
-    </br>
+    <br>
     <label>expanding/contracting ellipticals</label>
     <input type="checkbox" v-model="currentlySelectedVisuals.visualSetting1" value=true>
     <label>center of sun</label>
