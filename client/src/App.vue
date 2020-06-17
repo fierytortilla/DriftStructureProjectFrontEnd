@@ -48,7 +48,7 @@ body {
 
 body::after{
   content: "";
-  background: url('./assets/driftLogo.png');
+  background: url('./assets/driftLogo2.png');
   background-size: 75%;
   background-repeat: no-repeat;
   background-position: center;

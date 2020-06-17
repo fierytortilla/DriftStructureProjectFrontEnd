@@ -45,12 +45,7 @@ export default {
             this.currentlyPlayingSong= songURL;
         }
     });
-  },
-  methods: {
-      callBackOnP5: function(timeStr){
-          this.message= timeStr;
-      }
-  },
+  }
 };
 </script>
 
